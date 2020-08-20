@@ -1,5 +1,5 @@
 <?php
-	$title = 'MinimalisticA';
+	$title = 'MinimallisticA';
 	$h1 = 'Greeetings boys and girls! Are you ready to rock\'n\'roll?!';
 	
 	// еще задания:
