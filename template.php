@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallary</title>
+  <title>Gallery</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 <div class="container">
   
-  <h1>Photo gallary</h1>
-  <div class="gallary">
+  <h1>Photo gallery</h1>
+  <div class="gallery">
   <?php
-  include "gallary.php";
+  include "gallery.php";
   ?>
 </div>
 
