@@ -11,10 +11,16 @@
   
   <h1>Photo gallery</h1>
   <div class="gallery">
-  <?php
-  include "gallery.php";
-  ?>
-</div>
+    <?php
+    include "gallery.php";
+    ?>
+  </div>
+
+  <form action="server.php" method="post" enctype="multipart/form-data">
+    <p>Загрузить файл</p>
+    <input type="file" name="photo">
+    <input type="submit" value="Сохранить">
+  </form>
 
 </div>
   
