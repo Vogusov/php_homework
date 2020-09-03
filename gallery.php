@@ -1,14 +1,13 @@
 <?php
-$path = $_SERVER['DOCUMENT_ROOT'];
-$path_images = "$path/images";
-$path_images_sm = "$path/images-sm";
-$images = scandir($path_images);
-$images_sm = scandir($path_images_sm);
+include "config.php";
 
-for ($i=2; $i < count($images_sm); $i++): ?>
+$images = array_slice(scandir(SMALL_IMAGES_FOLDER), 2);
 
-<a href='<?="images/$images[$i]"; ?>' class="gallery__item" target="_blank">
- <img src='<?="images-sm/$images_sm[$i]"; ?>' alt="">
+
+for ($i=0; $i < count($images); $i++): ?>
+
+<a href="image.php?photo=<?=$images[$i]; ?>" class="gallery__item" target="_blank">
+ <img src="<?=SMALL_IMAGES_FOLDER.$images[$i]; ?>" alt="">
 </a>
 
 <?php endfor; ?>
