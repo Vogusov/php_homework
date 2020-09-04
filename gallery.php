@@ -1,13 +1,12 @@
 <?php
 include "config.php";
 
-$images = array_slice(scandir(SMALL_IMAGES_FOLDER), 2);
+$sql = "select * from images";
+$res = mysqli_query($connect, $sql);
 
 
-for ($i=0; $i < count($images); $i++): ?>
-
-<a href="image.php?photo=<?=$images[$i]; ?>" class="gallery__item" target="_blank">
- <img src="<?=SMALL_IMAGES_FOLDER.$images[$i]; ?>" alt="">
-</a>
-
-<?php endfor; ?>
+while($images = mysqli_fetch_assoc($res)):?>
+  <a href="image.php?id=<?=$images['id']; ?>" class="gallery__item" target="_blank">
+    <img src="<?=$images['location_small'].$images['name']; ?>" alt="">
+  </a>
+<?php endwhile; ?>

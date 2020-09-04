@@ -1,8 +1,12 @@
 <?php
-
 include_once 'config.php';
 
+$get_id = $_GET['id'];
+$sql = "select location, name from images where id=$get_id";
+$res = mysqli_query($connect, $sql); 
+$image = mysqli_fetch_assoc($res);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,15 +16,13 @@ include_once 'config.php';
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-<!-- <div class="container"> -->
   
   <a href="index.php"> Вернуться в галерею </a>
   
   <div class="full-image-container">
-    <img src="<?=IMAGES_FOLDER.$_GET['photo'] ?>" alt="">
+    <img src="<?=$image['location'].$image['name'] ?>" alt="">
   </div>
 
-<!-- </div> -->
   
 </body>
 </html>

@@ -5,6 +5,8 @@ include "resize.php";
 
 $path = IMAGES_FOLDER.translit($_FILES["photo"]["name"]);
 $path_sm =  SMALL_IMAGES_FOLDER.translit($_FILES["photo"]["name"]);
+$file_name = translit($_FILES["photo"]["name"]);
+$file_size = $_FILES["photo"]["size"];
 
 if (isset($_POST["send"])) {
   if ($_FILES["photo"]["error"]){
@@ -18,6 +20,11 @@ if (isset($_POST["send"])) {
   ) {
     if (copy($_FILES["photo"]["tmp_name"], $path)) {
       resize($path, $path_sm, 300);
+
+      //sql ???
+      $sql = "insert into images (name, size) values ($file_name, $file_size)";
+      mysqli_query($connect, $sql);
+
       echo "Файл загружен! <br> <a href=\"index.php\">К галерее</a>";
     } else {
       echo "Обшибка при загрузке файла <br> <a href=\"index.php\">К галерее</a>";
