@@ -1,14 +1,12 @@
 <?php
-$path = $_SERVER['DOCUMENT_ROOT'];
-$path_images = "$path/images";
-$path_images_sm = "$path/images-sm";
-$images = scandir($path_images);
-$images_sm = scandir($path_images_sm);
+include "config.php";
 
-for ($i=2; $i < count($images_sm); $i++): ?>
+$sql = "select * from images";
+$res = mysqli_query($connect, $sql);
 
-<a href='<?="images/$images[$i]"; ?>' class="gallery__item" target="_blank">
- <img src='<?="images-sm/$images_sm[$i]"; ?>' alt="">
-</a>
 
-<?php endfor; ?>
+while($images = mysqli_fetch_assoc($res)):?>
+  <a href="image.php?id=<?=$images['id']; ?>" class="gallery__item" target="_blank">
+    <img src="<?=$images['location_small'].$images['name']; ?>" alt="">
+  </a>
+<?php endwhile; ?>
