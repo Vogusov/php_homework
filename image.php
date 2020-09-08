@@ -1,28 +1,23 @@
 <?php
 include_once 'config.php';
 
-$get_id = $_GET['id'];
-$sql = "select location, name from images where id=$get_id";
-$res = mysqli_query($connect, $sql); 
-$image = mysqli_fetch_assoc($res);
-?>
+$tpl = file_get_contents("image.tpl");
+$id = $_GET['id'];
+$sql = "select * from images where id=$id";
+$res = mysqli_query($connect, $sql);
+$sql_views_incr = "update images set views = views+1 where id=$id";
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery</title>
-  <link rel="stylesheet" href="/css/main.css">
-</head>
-<body>
-  
-  <a href="index.php"> Вернуться в галерею </a>
-  
-  <div class="full-image-container">
-    <img src="<?=$image['location'].$image['name'] ?>" alt="">
-  </div>
+if (mysqli_num_rows($res) > 0) {
+    mysqli_query($connect, $sql_views_incr);
+    $image = mysqli_fetch_assoc($res);
+    $title = "image_id=$id";
+    $views = $image['views'] + 1;
+    $img_source = $image['location'].$image['name'];
+} else {
+    echo "В базе нет изображения c ID=$id!<br><a href=\"index.php\"> Вернуться в галерею </a>";
+}
+mysqli_close($connect);
 
-  
-</body>
-</html>
+$patterns = ['/{title}/', '/{views}/', '/{img_source}/'];
+$replace = [$title, $views, $img_source];
+echo preg_replace($patterns, $replace, $tpl);
