@@ -21,7 +21,6 @@
     <input type="file" name="photo">
     <input type="submit" name="send" value="Сохранить">
   </form>
-
 </div>
   
 </body>
